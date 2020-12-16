@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class NumbersActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
-    MediaPlayer.OnCompletionListener mcompletionlistener = new MediaPlayer.OnCompletionListener() {
+    private MediaPlayer.OnCompletionListener mcompletionlistener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mp) {
             releasemediaplayer();
@@ -52,6 +52,13 @@ public class NumbersActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+
     private void releasemediaplayer(){
         if (mediaPlayer !=null){
             mediaPlayer.release();

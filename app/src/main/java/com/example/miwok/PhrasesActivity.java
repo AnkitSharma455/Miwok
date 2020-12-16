@@ -19,6 +19,8 @@ public class PhrasesActivity extends AppCompatActivity {
             releasemediaplayer();
         }
     };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +53,14 @@ public class PhrasesActivity extends AppCompatActivity {
 
             }
         });
-
-
-
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+
     private void releasemediaplayer(){
         if (mediaPlayer != null){
             mediaPlayer.release();
