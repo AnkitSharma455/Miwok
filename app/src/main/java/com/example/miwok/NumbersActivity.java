@@ -12,6 +12,13 @@ import java.util.ArrayList;
 
 public class NumbersActivity extends AppCompatActivity {
 
+    private MediaPlayer mediaPlayer;
+    MediaPlayer.OnCompletionListener mcompletionlistener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releasemediaplayer();
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +43,19 @@ public class NumbersActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                releasemediaplayer();
                 word currentword = words.get(position);
-                MediaPlayer mediaPlayer = MediaPlayer.create(NumbersActivity.this,currentword.getAudioid());
+                mediaPlayer = MediaPlayer.create(NumbersActivity.this,currentword.getAudioid());
                 mediaPlayer.start();
+                mediaPlayer.setOnCompletionListener(mcompletionlistener);
             }
         });
 
+    }
+    private void releasemediaplayer(){
+        if (mediaPlayer !=null){
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }
