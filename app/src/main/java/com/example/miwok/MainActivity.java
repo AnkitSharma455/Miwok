@@ -1,11 +1,9 @@
 package com.example.miwok;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
+import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,41 +12,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView numbers = findViewById(R.id.numbers);
-        TextView phrases = findViewById(R.id.phrases);
-        TextView colors = findViewById(R.id.colors);
-        TextView family = findViewById(R.id.family);
 
-        numbers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,NumbersActivity.class);
-                startActivity(i);
-            }
-        });
-
-        phrases.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,PhrasesActivity.class);
-                startActivity(i);
-            }
-        });
-
-        colors.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,ColorsActivity.class);
-                startActivity(i);
-            }
-        });
-
-        family.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,FamilyActivity.class);
-                startActivity(i);
-            }
-        });
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        CategoryAdapter adapter = new CategoryAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
     }
 }
