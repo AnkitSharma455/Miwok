@@ -37,14 +37,12 @@ public class PhrasesFragment extends Fragment {
     private AudioManager.OnAudioFocusChangeListener maudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         @Override
         public void onAudioFocusChange(int focusChange) {
-            if (focusChange == AudioManager.AUDIOFOCUS_LOSS){
+            if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
                 releasemediaplayer();
-            }
-            else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK){
+            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
                 mediaPlayer.pause();
                 mediaPlayer.seekTo(0);
-            }
-            else if (focusChange == AudioManager.AUDIOFOCUS_GAIN){
+            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
                 mediaPlayer.start();
             }
         }
@@ -92,22 +90,22 @@ public class PhrasesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview =  inflater.inflate(R.layout.word_list, container, false);
+        View rootview = inflater.inflate(R.layout.word_list, container, false);
 
         audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
         final ArrayList<word> words = new ArrayList<>();
-        words.add(new word("Where are you going?", "minto wuksus",R.raw.phrase_where_are_you_going));
-        words.add(new word("What is your name?", "tinnә oyaase'nә",R.raw.phrase_what_is_your_name));
-        words.add(new word("My name is...", "oyaaset...",R.raw.phrase_my_name_is));
-        words.add(new word("How are you feeling?", "michәksәs?",R.raw.phrase_how_are_you_feeling));
-        words.add(new word("I’m feeling good.", "kuchi achit",R.raw.phrase_im_feeling_good));
-        words.add(new word("Are you coming?", "әәnәs'aa?",R.raw.phrase_are_you_coming));
-        words.add(new word("Yes, I’m coming.", "hәә’ әәnәm",R.raw.phrase_yes_im_coming));
-        words.add(new word("I’m coming.", "әәnәm",R.raw.phrase_im_coming));
-        words.add(new word("Let’s go.", "yoowutis",R.raw.phrase_lets_go));
-        words.add(new word("Come here.", "әnni'nem",R.raw.phrase_come_here));
+        words.add(new word("Where are you going?", "minto wuksus", R.raw.phrase_where_are_you_going));
+        words.add(new word("What is your name?", "tinnә oyaase'nә", R.raw.phrase_what_is_your_name));
+        words.add(new word("My name is...", "oyaaset...", R.raw.phrase_my_name_is));
+        words.add(new word("How are you feeling?", "michәksәs?", R.raw.phrase_how_are_you_feeling));
+        words.add(new word("I’m feeling good.", "kuchi achit", R.raw.phrase_im_feeling_good));
+        words.add(new word("Are you coming?", "әәnәs'aa?", R.raw.phrase_are_you_coming));
+        words.add(new word("Yes, I’m coming.", "hәә’ әәnәm", R.raw.phrase_yes_im_coming));
+        words.add(new word("I’m coming.", "әәnәm", R.raw.phrase_im_coming));
+        words.add(new word("Let’s go.", "yoowutis", R.raw.phrase_lets_go));
+        words.add(new word("Come here.", "әnni'nem", R.raw.phrase_come_here));
 
-        wordAdapter adapter = new wordAdapter(getActivity(), words,R.color.category_phrases);
+        wordAdapter adapter = new wordAdapter(getActivity(), words, R.color.category_phrases);
         ListView listView = rootview.findViewById(R.id.list);
         listView.setAdapter(adapter);
 
@@ -116,9 +114,9 @@ public class PhrasesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 word currentword = words.get(position);
                 releasemediaplayer();
-                int result = audioManager.requestAudioFocus(maudioFocusChangeListener,AudioManager.STREAM_MUSIC,AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
-                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
-                    mediaPlayer = MediaPlayer.create(getActivity(),currentword.getAudioid());
+                int result = audioManager.requestAudioFocus(maudioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    mediaPlayer = MediaPlayer.create(getActivity(), currentword.getAudioid());
                     mediaPlayer.start();
                     mediaPlayer.setOnCompletionListener(mcompletionListener);
                 }
@@ -136,8 +134,8 @@ public class PhrasesFragment extends Fragment {
     }
 
 
-    private void releasemediaplayer(){
-        if (mediaPlayer != null){
+    private void releasemediaplayer() {
+        if (mediaPlayer != null) {
             mediaPlayer.release();
             mediaPlayer = null;
             audioManager.abandonAudioFocus(maudioFocusChangeListener);
